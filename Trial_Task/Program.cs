@@ -1,24 +1,8 @@
-﻿using cloudscribe.HtmlAgilityPack;
+﻿using Trial_Task;
 
-ExtractHref("https://google.com");
-static void ExtractHref(string URL)
-{
-    List<string> sitemapLinks = new List<string>();
-    HtmlWeb web = new HtmlWeb();
-    HtmlDocument doc = new HtmlDocument();
-    doc = web.Load(URL);
+string url = "https://github.com";
 
-    foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
-    {
-        HtmlAttribute att = link.Attributes["href"];
-
-
-        //Console.WriteLine(att.Value);
-        string item = att.Value[0] == '/' ? (URL + att.Value) : att.Value;
-        if (att.Value.Contains("/") && !sitemapLinks.Contains(item))
-        {
-            sitemapLinks.Add(item);
-            Console.WriteLine(item);
-        }
-    }
-}
+SitemapChecker.ParseSitemap(url);
+SitemapChecker.Print();
+Crawler.ExtractHref(url); //https://seoagilitytools.com https://google.com
+Crawler.Print();
