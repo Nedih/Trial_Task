@@ -25,15 +25,8 @@ namespace Trial_Task
             }
         }
 
-        static internal void Print()
+        static internal void PrintCount()
         {
-            Console.WriteLine("Urls FOUNDED WITH CRAWLER");
-
-            foreach (string link in crawlerLinks)
-            {
-                Console.WriteLine(link);
-            }
-
             Console.WriteLine($"Urls(html documents) found after crawling a website: {crawlerLinks.Count}");
         }
     }

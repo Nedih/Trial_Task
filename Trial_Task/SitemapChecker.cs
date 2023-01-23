@@ -8,7 +8,7 @@ namespace Trial_Task
 {
     static internal class SitemapChecker
     {
-        static List<string> sitemapLinks = new List<string>();
+        static internal List<string> sitemapLinks = new List<string>();
         static private WebClient wc = new WebClient();
 
         static internal void ParseSitemap(string URL)
@@ -38,15 +38,8 @@ namespace Trial_Task
             }
         }
 
-        static internal void Print()
+        static internal void PrintCount()
         {
-            Console.WriteLine("Urls FOUNDED IN SITEMAP.XML");
-
-            foreach (string link in sitemapLinks)
-            {
-                Console.WriteLine(link);
-            }
-
             Console.WriteLine($"Urls found in sitemap: {sitemapLinks.Count}");
         }
     }
