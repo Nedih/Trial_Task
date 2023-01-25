@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Xml;
 
-namespace Trial_Task
+namespace Trial_Task.Web
 {
     static internal class SitemapChecker
     {
@@ -14,7 +14,7 @@ namespace Trial_Task
 
         static internal async Task ParseSitemapAsync(string URL)
         {
-            string sitemapURL, sitemapString; 
+            string sitemapString, sitemapURL = "";
             XmlDocument urldoc = new XmlDocument();
 
             sitemapLinks.Clear();
@@ -30,12 +30,12 @@ namespace Trial_Task
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine($"{sitemapURL} - {e.Message}");
+                    Console.WriteLine($"{sitemapURL} - {e.Message}");
                 }
 
             }
-            
-            XmlNodeList xmlSitemapList = urldoc.GetElementsByTagName("url");        
+
+            XmlNodeList xmlSitemapList = urldoc.GetElementsByTagName("url");
 
             foreach (XmlNode node in xmlSitemapList)
             {
@@ -47,7 +47,7 @@ namespace Trial_Task
         }
 
         static internal void PrintCount()
-        {           
+        {
             Console.WriteLine($"Urls found in sitemap: {sitemapLinks.Count}");
         }
     }

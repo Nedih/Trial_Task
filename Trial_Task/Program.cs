@@ -1,6 +1,7 @@
 ﻿using Trial_Task;
+using Trial_Task.Web;
 
-string url = "https://seoagilitytools.com";
+string url = InputService.GetInput();
 
 await SitemapChecker.ParseSitemapAsync(url);
 Crawler.ExtractHref(url); //https://seoagilitytools.com https://google.com 
@@ -26,7 +27,7 @@ else
     Console.WriteLine("Urls NOT FOUND BY CRAWLING THE WEBSITE\n");
 }
 
-ResponseTimeChecker.PrintUrlsResponseTime(mergedUrls);
+await ResponseTimeChecker.PrintUrlsResponseTimeAsync(mergedUrls);
 
 Crawler.PrintCount();
 SitemapChecker.PrintCount();   

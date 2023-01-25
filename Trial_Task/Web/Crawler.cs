@@ -1,6 +1,6 @@
 ﻿using cloudscribe.HtmlAgilityPack;
 
-namespace Trial_Task
+namespace Trial_Task.Web
 {
     static internal class Crawler
     {
@@ -15,10 +15,10 @@ namespace Trial_Task
             foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
             {
                 HtmlAttribute att = link.Attributes["href"];
-                if (string.IsNullOrEmpty(att.Value)) 
-                    continue; 
+                if (string.IsNullOrEmpty(att.Value))
+                    continue;
 
-                string item = att.Value.First() == '/' ? (URL + att.Value) : att.Value;
+                string item = att.Value.First() == '/' ? URL + att.Value : att.Value;
 
                 if (item.Contains("/") && !crawlerLinks.Contains(item))
                     crawlerLinks.Add(item);
