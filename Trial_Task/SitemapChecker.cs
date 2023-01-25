@@ -9,15 +9,15 @@ namespace Trial_Task
     static internal class SitemapChecker
     {
         static internal List<string> sitemapLinks = new List<string>();
-        static private WebClient wc = new WebClient();
+        static private HttpClient hc = new HttpClient();
 
-        static internal void ParseSitemap(string URL)
+        static internal async Task ParseSitemapAsync(string URL)
         {
             string sitemapURL = URL + "/sitemap.xml";
-            wc.Encoding = System.Text.Encoding.UTF8;
+            //wc.Encoding = System.Text.Encoding.UTF8;
             XmlDocument urldoc = new XmlDocument();
             try {
-                string sitemapString = wc.DownloadString(sitemapURL);
+                string sitemapString = await hc.GetStringAsync(sitemapURL);
                 urldoc.LoadXml(sitemapString);
             } 
             catch (Exception e)

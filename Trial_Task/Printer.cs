@@ -14,6 +14,8 @@ namespace Trial_Task
             {
                 Console.WriteLine(item);
             }
+
+            Console.WriteLine();
         }
     }
 }
