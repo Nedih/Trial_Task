@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Trial_Task
 {
-    internal static class InputService
+    internal static class InputHandler
     {
         internal static string GetInput()
         {      

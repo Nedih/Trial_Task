@@ -1,7 +1,7 @@
 ﻿using Trial_Task;
 using Trial_Task.Web;
 
-string url = InputService.GetInput();
+string url = InputHandler.GetInput();
 
 await SitemapChecker.ParseSitemapAsync(url);
 Crawler.ExtractHref(url); //https://seoagilitytools.com https://google.com 
