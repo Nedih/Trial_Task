@@ -10,24 +10,32 @@ namespace Trial_Task
     {
         static internal List<string> sitemapLinks = new List<string>();
         static private HttpClient hc = new HttpClient();
+        static readonly List<string> sitemapAddresses = new List<string> { "/sitemap.xml", "/sitemap_index.xml", "/sitemapindex.xml", "/sitemap/index.xml", "/sitemap1.xml" };
 
         static internal async Task ParseSitemapAsync(string URL)
         {
-            string sitemapURL = URL + "/sitemap.xml";
-            //wc.Encoding = System.Text.Encoding.UTF8;
+            string sitemapURL, sitemapString; 
             XmlDocument urldoc = new XmlDocument();
-            try {
-                string sitemapString = await hc.GetStringAsync(sitemapURL);
-                urldoc.LoadXml(sitemapString);
-            } 
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
-            XmlNodeList xmlSitemapList = urldoc.GetElementsByTagName("url");
 
             sitemapLinks.Clear();
+
+            foreach (string link in sitemapAddresses)
+            {
+                try
+                {
+                    sitemapURL = URL + link;
+                    sitemapString = await hc.GetStringAsync(sitemapURL);
+                    urldoc.LoadXml(sitemapString);
+                    break;
+                }
+                catch (Exception e)
+                {
+                    //Console.WriteLine($"{sitemapURL} - {e.Message}");
+                }
+
+            }
+            
+            XmlNodeList xmlSitemapList = urldoc.GetElementsByTagName("url");        
 
             foreach (XmlNode node in xmlSitemapList)
             {
@@ -39,7 +47,7 @@ namespace Trial_Task
         }
 
         static internal void PrintCount()
-        {
+        {           
             Console.WriteLine($"Urls found in sitemap: {sitemapLinks.Count}");
         }
     }
