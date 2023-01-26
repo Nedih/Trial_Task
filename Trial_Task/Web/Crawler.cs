@@ -21,7 +21,7 @@ namespace Trial_Task.Web
 
                 item = att.Value.First() == '/' ? URL + att.Value : att.Value;
 
-                if (item.Contains("/") && !crawlerLinks.Contains(item))
+                if (item.Contains("/") && !crawlerLinks.Contains(item) && item.StartsWith(URL))
                     crawlerLinks.Add(item);
             }
         }
