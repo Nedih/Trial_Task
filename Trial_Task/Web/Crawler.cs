@@ -11,6 +11,7 @@ namespace Trial_Task.Web
         static internal void ExtractHref(string URL)
         {
             doc = web.Load(URL);
+            string item;
 
             foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
             {
@@ -18,7 +19,7 @@ namespace Trial_Task.Web
                 if (string.IsNullOrEmpty(att.Value))
                     continue;
 
-                string item = att.Value.First() == '/' ? URL + att.Value : att.Value;
+                item = att.Value.First() == '/' ? URL + att.Value : att.Value;
 
                 if (item.Contains("/") && !crawlerLinks.Contains(item))
                     crawlerLinks.Add(item);

@@ -36,12 +36,14 @@ namespace Trial_Task.Web
             }
 
             XmlNodeList xmlSitemapList = urldoc.GetElementsByTagName("url");
+            string item;
 
             foreach (XmlNode node in xmlSitemapList)
             {
                 if (node["loc"] != null && !sitemapLinks.Contains(node["loc"].InnerText))
                 {
-                    sitemapLinks.Add(node["loc"].InnerText);
+                    item = node["loc"].InnerText.First() == '/' ? URL + node["loc"].InnerText : node["loc"].InnerText;
+                    sitemapLinks.Add(item);
                 }
             }
         }
