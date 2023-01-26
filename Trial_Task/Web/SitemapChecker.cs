@@ -43,6 +43,8 @@ namespace Trial_Task.Web
                 if (node["loc"] != null && !sitemapLinks.Contains(node["loc"].InnerText))
                 {
                     item = node["loc"].InnerText.First() == '/' ? URL + node["loc"].InnerText : node["loc"].InnerText;
+                    item = item.TrimEnd(new[] { '/' });
+
                     if (item.StartsWith(URL))
                         sitemapLinks.Add(item);
                 }

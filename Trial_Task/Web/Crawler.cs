@@ -29,7 +29,7 @@ namespace Trial_Task.Web
                     continue;
 
                 item = att.Value.First() == '/' ? domen + att.Value : att.Value;
-                //item = item.TrimEnd(new[] { '/' });
+                item = item.TrimEnd(new[] { '/' });
 
                 if (item.Contains("/") && !crawlerLinks.Contains(item) && item.StartsWith(domen))
                 {                
