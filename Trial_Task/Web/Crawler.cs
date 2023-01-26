@@ -29,6 +29,8 @@ namespace Trial_Task.Web
                     continue;
 
                 item = att.Value.First() == '/' ? domen + att.Value : att.Value;
+                if (item.IndexOf("?") > 0)
+                    item = item.Substring(0, item.IndexOf("?"));
                 item = item.TrimEnd(new[] { '/' });
 
                 if (item.Contains("/") && !crawlerLinks.Contains(item) && item.StartsWith(domen))
