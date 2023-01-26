@@ -5,13 +5,22 @@ namespace Trial_Task.Web
     static internal class Crawler
     {
         static internal List<string> crawlerLinks = new List<string>();
+        static private List<string> crawlQueue = new List<string>();
         static private readonly HtmlWeb web = new HtmlWeb();
-        static private HtmlDocument doc = new HtmlDocument();
 
         static internal void ExtractHref(string URL)
         {
-            doc = web.Load(URL);
+            crawlQueue.Add(URL);
+            while(crawlQueue.Count > 0)
+                Crawl(crawlQueue[0], URL);
+            return;
+        }
+
+        static private void Crawl(string URL, string domen)
+        {
             string item;
+            HtmlDocument doc = new HtmlDocument();
+            doc = web.Load(URL);
 
             foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]"))
             {
@@ -19,14 +28,19 @@ namespace Trial_Task.Web
                 if (string.IsNullOrEmpty(att.Value))
                     continue;
 
-                item = att.Value.First() == '/' ? URL + att.Value : att.Value;
+                item = att.Value.First() == '/' ? domen + att.Value : att.Value;
+                //item = item.TrimEnd(new[] { '/' });
 
-                if (item.Contains("/") && !crawlerLinks.Contains(item) && item.StartsWith(URL))
+                if (item.Contains("/") && !crawlerLinks.Contains(item) && item.StartsWith(domen))
+                {                
                     crawlerLinks.Add(item);
+                    crawlQueue.Add(item);
+                }
             }
+            crawlQueue.Remove(URL);
         }
 
-        static internal void PrintCount()
+            static internal void PrintCount()
         {
             Console.WriteLine($"Urls(html documents) found after crawling a website: {crawlerLinks.Count}");
         }
