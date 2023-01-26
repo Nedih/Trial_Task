@@ -20,8 +20,7 @@ namespace Trial_Task
                 if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))                   
                     return url.TrimEnd(new[] { '/' });
                 Console.WriteLine("Input is not correct, your address must be in the format http://example.com or https://example.com:");
-            }
-            
+            }           
         }
     }
 }

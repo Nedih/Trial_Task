@@ -19,17 +19,23 @@ namespace Trial_Task.Web
 
             foreach (string link in mergedUrls)
             {
-                watch.Start();
+                try
+                {                    
+                    watch.Start();
+                    
+                    await hc.GetAsync(link);
 
-                await hc.GetAsync(link);
+                    watch.Stop();
 
-                watch.Stop();
-
-                urlsResponseTime.Add(link, watch.ElapsedMilliseconds);
-
+                    urlsResponseTime.Add(link, watch.ElapsedMilliseconds); 
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"{link} - {e.Message}");
+                }
+                
                 watch.Reset();
             }
-
             urlsResponseTime = urlsResponseTime.OrderBy(x => x.Value).ThenBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
 
             Console.WriteLine($"{"Url",-75} {"Timing (ms)",8}");
