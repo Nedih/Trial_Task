@@ -4,7 +4,7 @@ using Trial_Task.Web;
 string url = InputHandler.GetInput();
 
 await SitemapChecker.ParseSitemapAsync(url);
-Crawler.ExtractHref(url); //https://seoagilitytools.com https://google.com 
+Crawler.ExtractHref(url); 
 
 List<string> mergedUrls = Crawler.crawlerLinks.Union(SitemapChecker.sitemapLinks).ToList();
 

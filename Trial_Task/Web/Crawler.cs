@@ -29,7 +29,10 @@ namespace Trial_Task.Web
                     continue;
 
                 item = att.Value.First() == '/' ? domen + att.Value : att.Value;
-                if (item.IndexOf("?") > 0)
+
+                if (item.IndexOf("#") > 0)
+                    item = item.Substring(0, item.IndexOf("#"));
+                else if (item.IndexOf("?") > 0)
                     item = item.Substring(0, item.IndexOf("?"));
                 item = item.TrimEnd(new[] { '/' });
 
